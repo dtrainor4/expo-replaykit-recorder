@@ -1,0 +1,35 @@
+{
+  "name": "@swingspace/expo-replaykit-recorder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone Expo iOS ReplayKit screen recorder module.",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build",
+    "ios",
+    "expo-module.config.json",
+    "app.plugin.js",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf build",
+    "type-check": "tsc --noEmit -p tsconfig.json"
+  },
+  "keywords": [
+    "expo",
+    "react-native",
+    "ios",
+    "replaykit",
+    "screen-recording"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "expo": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}
