@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.swift_version  = '5.9'
   s.source         = { git: 'https://github.com/dtrainor4/expo-replaykit-recorder.git' }
   s.static_framework = true
+  s.frameworks     = 'ReplayKit', 'AVFoundation', 'CoreMedia'
 
   s.dependency 'ExpoModulesCore'
 
