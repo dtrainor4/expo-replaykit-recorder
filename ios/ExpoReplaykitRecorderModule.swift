@@ -51,12 +51,12 @@ public class ExpoReplaykitRecorderModule: Module {
 
   private func startRecording(options: [String: Any]?, promise: Promise) {
     if recorderState != .idle {
-      promise.reject("ERR_RECORDER_BUSY", "A screen recording is already in progress", nil)
+      promise.reject("ERR_RECORDER_BUSY", "A screen recording is already in progress")
       return
     }
 
     guard recorder.isAvailable else {
-      promise.reject("ERR_RECORDER_UNAVAILABLE", "ReplayKit recorder is not available on this device", nil)
+      promise.reject("ERR_RECORDER_UNAVAILABLE", "ReplayKit recorder is not available on this device")
       return
     }
 
@@ -66,7 +66,7 @@ public class ExpoReplaykitRecorderModule: Module {
     do {
       try prepareAssetWriter()
     } catch {
-      promise.reject("ERR_RECORDER_PREPARE_FAILED", "Failed to prepare output writer: \(error.localizedDescription)", error)
+      promise.reject("ERR_RECORDER_PREPARE_FAILED", "Failed to prepare output writer: \(error.localizedDescription)")
       resetState(deleteOutputFile: true)
       return
     }
@@ -91,7 +91,7 @@ public class ExpoReplaykitRecorderModule: Module {
       if let error = error {
         self.recorderState = .idle
         self.resetState(deleteOutputFile: true)
-        promise.reject("ERR_RECORDER_START_FAILED", "ReplayKit could not start capture: \(error.localizedDescription)", error)
+        promise.reject("ERR_RECORDER_START_FAILED", "ReplayKit could not start capture: \(error.localizedDescription)")
         return
       }
       promise.resolve(nil)
@@ -100,7 +100,7 @@ public class ExpoReplaykitRecorderModule: Module {
 
   private func stopRecording(promise: Promise) {
     guard recorderState == .recording else {
-      promise.reject("ERR_RECORDER_NOT_RUNNING", "No screen recording is currently in progress", nil)
+      promise.reject("ERR_RECORDER_NOT_RUNNING", "No screen recording is currently in progress")
       return
     }
 
@@ -112,7 +112,7 @@ public class ExpoReplaykitRecorderModule: Module {
       if let error = error {
         self.recorderState = .idle
         self.resetState(deleteOutputFile: true)
-        promise.reject("ERR_RECORDER_STOP_FAILED", "Failed to stop ReplayKit capture: \(error.localizedDescription)", error)
+        promise.reject("ERR_RECORDER_STOP_FAILED", "Failed to stop ReplayKit capture: \(error.localizedDescription)")
         return
       }
 
@@ -124,7 +124,7 @@ public class ExpoReplaykitRecorderModule: Module {
         guard let writer = self.assetWriter, let outputURL = self.outputURL else {
           self.recorderState = .idle
           self.resetState(deleteOutputFile: true)
-          promise.reject("ERR_RECORDER_MISSING_WRITER", "Recording writer was unavailable while stopping capture", nil)
+          promise.reject("ERR_RECORDER_MISSING_WRITER", "Recording writer was unavailable while stopping capture")
           return
         }
 
@@ -134,7 +134,7 @@ public class ExpoReplaykitRecorderModule: Module {
             let writerError = writer.error
             self.recorderState = .idle
             self.resetState(deleteOutputFile: true)
-            promise.reject("ERR_RECORDER_WRITE_FAILED", "Failed to finalize captured recording", writerError)
+            promise.reject("ERR_RECORDER_WRITE_FAILED", "Failed to finalize captured recording")
             return
           }
 
