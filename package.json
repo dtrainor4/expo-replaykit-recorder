@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf build",
-    "type-check": "tsc --noEmit -p tsconfig.json"
+    "type-check": "tsc --noEmit -p tsconfig.json",
+    "prepare": "npm run build"
   },
   "keywords": [
     "expo",
@@ -28,6 +29,9 @@
   "peerDependencies": {
     "expo": "*",
     "react-native": "*"
+  },
+  "dependencies": {
+    "expo-modules-core": "*"
   },
   "devDependencies": {
     "typescript": "^5.7.2"
